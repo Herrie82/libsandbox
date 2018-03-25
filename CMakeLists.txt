@@ -1,6 +1,4 @@
-# @@@LICENSE
-#
-#      Copyright (c) 2010-2012 Hewlett-Packard Development Company, L.P.
+# Copyright (c) 2010-2018 LG Electronics, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# LICENSE@@@
+# SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 2.8.7)
 
@@ -34,6 +32,4 @@ webos_add_compiler_flags(ALL -Wall -fno-inline -fPIC)
 add_library(sandbox STATIC src/sandbox.cpp)
 webos_build_library()
 
-if(WEBOS_CONFIG_BUILD_TESTS)
-#	add_subdirectory(src/test)
-endif()
+add_subdirectory(src/test)

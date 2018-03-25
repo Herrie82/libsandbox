@@ -1,6 +1,4 @@
-# @@@LICENSE
-#
-#      Copyright (c) 2010-2012 Hewlett-Packard Development Company, L.P.
+# Copyright (c) 2010-2018 LG Electronics, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# LICENSE@@@
+# SPDX-License-Identifier: Apache-2.0
 
-add_executable(testsandbox testsandbox.cpp)
-webos_build_program(NAME testsandbox)
-target_link_libraries(testsandbox sandbox)
-#	webos_config_build_tests(src/test/testsandbox.cpp)
+set(libsandbox_test_NAME test-${CMAKE_PROJECT_NAME})
+add_executable(${libsandbox_test_NAME} EXCLUDE_FROM_ALL testsandbox.cpp)
+target_link_libraries(${libsandbox_test_NAME} ${CMAKE_PROJECT_NAME})
+
+add_dependencies(${libsandbox_test_NAME} ${CMAKE_PROJECT_NAME})
+
+if(WEBOS_CONFIG_BUILD_TESTS)
+	set(all_flag ALL)
+else()
+	set(all_flag "")
+endif()
+
+add_custom_target(tests ${all_flag}
+	DEPENDS ${libsandbox_test_NAME}
+	COMMAND cp ${libsandbox_test_NAME} ${PROJECT_BINARY_DIR}
+	COMMAND chmod u=rwx,g=rx,o=rx ${PROJECT_BINARY_DIR}/${libsandbox_test_NAME}
+	COMMENT "Building ${libsandbox_test_NAME}")
+

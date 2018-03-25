@@ -11,10 +11,10 @@ Dependencies
 
 Below are the tools and libraries (and their minimum versions) required to build libsandbox:
 
-- cmake (version required by openwebos/cmake-modules-webos)
+- cmake (version required by webosose/cmake-modules-webos)
 - g++ 4.6.3
 - make (any version)
-- openwebos/cmake-modules-webos 1.0.0 RC2
+- webosose/cmake-modules-webos 1.0.0 RC2
 
 How to Build on Linux
 =====================
@@ -34,11 +34,11 @@ The directory under which the files are installed defaults to `/usr/local/webos`
 You can install them elsewhere by supplying a value for `WEBOS_INSTALL_ROOT`
 when invoking `cmake`. For example:
 
-    $ cmake -D WEBOS_INSTALL_ROOT:PATH=$HOME/projects/openwebos ..
+    $ cmake -D WEBOS_INSTALL_ROOT:PATH=$HOME/projects/webosose ..
     $ make
     $ make install
 
-will install the files in subdirectories of `$HOME/projects/openwebos`.
+will install the files in subdirectories of `$HOME/projects/webosose`.
 
 Specifying `WEBOS_INSTALL_ROOT` also causes `pkg-config` to look in that tree
 first before searching the standard locations. You can specify additional
@@ -63,13 +63,27 @@ From the directory where you originally ran `make install`, enter:
 
 You will need to use `sudo` if you did not specify `WEBOS_INSTALL_ROOT`.
 
+## Unit test
+
+After you have run `cmake`, you can build the `test-sandbox` unit test by entering:
+
+    $ make tests
+
+You will find the `test-sandbox` binary in the current directory.
+
+To configure the building of `test-sandbox` to be done as part of 'make all', enter:
+
+    $ cmake -D WEBOS_CONFIG_BUILD_TESTS:BOOL=TRUE ..
+
 ## Copyright and License Information
 
-All content, including all source code files and documentation files in this repository are:
+Unless otherwise specified, all content, including all source code files and
+documentation files in this repository are:
 
-Copyright (c) 2010-2012 Hewlett-Packard Development Company, L.P.
+Copyright (c) 2010-2018 LG Electronics, Inc.
 
-All content, including all source code files and documentation files in this repository are:
+Unless otherwise specified or set forth in the NOTICE file, all content,
+including all source code files and documentation files in this repository are:
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this content except in compliance with the License.
 You may obtain a copy of the License at
